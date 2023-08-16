@@ -1,4 +1,8 @@
+drop database IF EXISTS bd_sistema_bancario;
+
 create database bd_sistema_bancario;
+
+\c bd_sistema_bancario;
 
 create table tabela1 (codigo integer);
 create table tabela2 (cliente char);
@@ -28,3 +32,4 @@ ALTER TABLE emprestimo rename to tbl_emprestimo;
 
 ALTER TABLE agencia RENAME COLUMN CIDADE_AGENCIA TO ENDERECO_AGENCIA;
 ALTER TABLE agencia rename to tbl_agencia;
+CREATE SCHEMA mariana;
