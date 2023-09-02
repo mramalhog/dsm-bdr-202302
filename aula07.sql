@@ -21,6 +21,7 @@ INSERT INTO tbl_estoque(cod_fornecedor, cod_peca, quantidade) values
 SELECT upper (t.nome), lower (p.nome)
 FROM tbl_fornecedor t, tbl_peca p
 WHERE t.cidade=p.cidade;
+ORDER BY t.nome ASC;
 
 --listar as cidades onde existem fornecedores (sem valores duplicados)
 SELECT DISTINCT (cidade)
