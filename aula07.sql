@@ -43,6 +43,9 @@ INNER JOIN tbl_peca p ON e.cod_peca=p.cod_peca
 WHERE e.quantidade > 10 AND e.cod_peca=1;
 
 --Listar a quantidade total de peças com código 1, fornecidas pelos fornecedores.
+SELECT sum (quantidade)
+FROM tbl_estoque
+WHERE cod_peca=1;
 
 --Listar a média dos preços das peças fornecidas pelo fornecedor com código 3.
 
