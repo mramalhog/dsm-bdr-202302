@@ -6,6 +6,7 @@ create table tbl_cliente (codigo_cliente integer PRIMARY KEY, nome text not null
 create table tbl_titulo (codigo_titulo integer primary key, titulo text not null, descricao text, categoria chk_categoria);
 create table tbl_livros (cod_livro integer PRIMARY KEY, codigo_titulo integer REFERENCES tbl_titulo(codigo_titulo), status chk_status DEFAULT 'DISPONIVEL');
 create table tbl_emprestimo (numero_emprestimo integer PRIMARY KEY, codigo_cliente integer REFERENCES tbl_cliente(codigo_cliente), codigo_livro integer REFERENCES tbl_livros(cod_livro));
+
 -- Inserir dados na tabela tbl_cliente
 INSERT INTO tbl_cliente (codigo_cliente, nome, cidade, endereco)
 VALUES
@@ -14,6 +15,7 @@ VALUES
     (3, 'Pedro Almeida', 'Belo Horizonte', 'Rua C, 789'),
     (4, 'Ana Oliveira', 'Salvador', 'Av. D, 1011'),
     (5, 'Carlos Lima', 'Brasília', 'Rua E, 1213');
+
 -- Inserir dados na tabela tbl_titulo
 INSERT INTO tbl_titulo (codigo_titulo, titulo, descricao, categoria)
 VALUES
@@ -22,6 +24,7 @@ VALUES
     (3, 'Amor nas Estrelas', 'Um romance intergaláctico', 'DRAMA'),
     (4, 'Código Enigmatico', 'Segredos ocultos', 'COMEDIA'),
     (5, 'Histórias Perdidas', 'Contos esquecidos', 'DRAMA');
+
 -- Inserir dados na tabela tbl_livros
 INSERT INTO tbl_livros (cod_livro, codigo_titulo, status)
 VALUES
@@ -30,6 +33,7 @@ VALUES
     (3, 2, 'DISPONIVEL'),
     (4, 3, 'ALUGADO'),
     (5, 4, 'ALUGADO');
+
 -- Inserir dados na tabela tbl_emprestimo
 INSERT INTO tbl_emprestimo (numero_emprestimo, codigo_cliente, codigo_livro)
 VALUES
@@ -56,8 +60,23 @@ LEFT JOIN tbl_emprestimo e ON t.codigo_cliente = e.codigo_cliente
 WHERE e.numero_emprestimo is null;
 
 --Liste os títulos e suas categorias dos livros disponiveis
+SELECT t.titulo, categoria
+FROM tbl_titulo t
+INNER JOIN tbl_livros l ON t.codigo_titulo = l.codigo_titulo
+WHERE l.status = 'DISPONIVEL';
 
 --Liste os nomes dos clientes e os títulos dos livros que eles têm alugados
-
+SELECT c.nome, t.titulo 
+FROM tbl_cliente c 
+LEFT JOIN tbl_emprestimo e ON c.codigo_cliente = e.codigo_cliente 
+LEFT JOIN tbl_livros l ON e.codigo_livro = l.cod_livro 
+LEFT JOIN tbl_titulo t ON l.codigo_titulo = t.codigo_titulo 
+WHERE l.status = 'ALUGADO' OR l.status IS NULL;
 
 --Retorne o nome, titulo do livro e o status do esmprestimo do livro alugado pela Ana Oliveira
+SELECT c.nome, t.titulo, l.status
+FROM tbl_cliente c 
+JOIN tbl_emprestimo e ON c.codigo_cliente = e.codigo_cliente 
+JOIN tbl_livros l ON e.codigo_livro = l.cod_livro 
+JOIN tbl_titulo t ON l.codigo_titulo = t.codigo_titulo 
+WHERE c.nome = 'Ana Oliveira' AND l.status = 'ALUGADO';
