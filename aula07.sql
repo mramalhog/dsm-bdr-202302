@@ -48,11 +48,25 @@ FROM tbl_estoque
 WHERE cod_peca=1;
 
 --Listar a média dos preços das peças fornecidas pelo fornecedor com código 3.
+SELECT AVG(p.preco) AS media_precos
+FROM tbl_estoque e
+JOIN tbl_peca p ON e.cod_peca = p.cod_peca
+WHERE e.cod_fornecedor = 3;
 
 --lista o valor da pecas mais cara e a mais barata.
+SELECT AVG(p.preco) AS media_precos
+FROM tbl_estoque e
+JOIN tbl_peca p ON e.cod_peca = p.cod_peca
+WHERE e.cod_fornecedor = 3;
 
 --listar a quantidade de peças cadastradas
+SELECT COUNT(*) AS quantidade_de_pecas
+FROM tbl_peca;
 
 --listar a quantidade de cidades diferentes onde existem peças cadastradas
+SELECT COUNT(DISTINCT cidade) AS quantidade_de_cidades
+FROM tbl_peca;
 
 -- listar a media dos precos de todas as peças, com somente 1 digito após a virgula.
+SELECT ROUND(AVG(preco), 1) AS media_precos
+FROM tbl_peca;
