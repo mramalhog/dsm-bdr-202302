@@ -183,7 +183,6 @@ INSERT INTO tbl_empregados (nome, data_nascimento, endereco, sexo, salario, cod_
 --1 crie uma view chamada v_depcidade que liste o nome de cada departamento com o nome da cidade onde este departamento está localizado.
 --Após a criacao executar Select * from v_depcidade; retorna 36 linhas
 
-
 --2 crie uma view denominada v_depcidadehouston, a partir de v_depcidade que mostre somente os departamentos localizados em Houston
 -- execute select * from v_depcidadehouston
 
