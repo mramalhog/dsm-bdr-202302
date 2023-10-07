@@ -224,7 +224,7 @@ SELECT * FROM v_empregados_salarial;
 CREATE OR REPLACE VIEW v_departemp AS
 SELECT d.nome AS departamento, COUNT(e.cod_empregado) AS quantidade_empregados
 FROM tbl_departamentos d
-LEFT JOIN tbl_empregados e ON d.cod_departamento = e.cod_departamento
+INNER JOIN tbl_empregados e ON d.cod_departamento = e.cod_departamento
 GROUP BY d.nome
 ORDER BY quantidade_empregados DESC;
 
